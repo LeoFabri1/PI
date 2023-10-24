@@ -19,7 +19,7 @@ app.listen(port, () => {
 const dbConfig = {
     user: 'LEO',
     password: 'renataematheus',
-    connectString: 'localhost:1521/xepdb1' // Corrigido o formato da conexão
+    connectString: 'localhost:1521/xepdb1' 
 };
 
 async function inserirAeronave(modelo, numero_identificacao, fabricante, ano_fabricacao, mapa_assentos) {
@@ -38,7 +38,7 @@ async function inserirAeronave(modelo, numero_identificacao, fabricante, ano_fab
         const result = await connection.execute(sql, bindParams, { autoCommit: true });
 
         await connection.close();
-        return result.rowsAffected; // Retorna o número de linhas afetadas
+        return result.rowsAffected; 
     } catch (error) {
         console.error('Erro ao inserir aeronave:', error);
         throw error;
@@ -56,7 +56,6 @@ app.post('/inserir-aeronave', async (req, res) => {
     }
 });
 
-// Restante do código para inserir outros tipos de dados (Aeroporto, Trecho, Voo)
 
 app.listen(port, () => {
     console.log(`Servidor está ouvindo na porta ${port}`);
