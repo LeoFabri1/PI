@@ -19,7 +19,6 @@ app.get('/', (req, res) => {
 });
 
 
-// Configuração do banco de dados Oracle
 const dbConfig = {
   user: 'LEO',
   password: 'renataematheus',
@@ -122,10 +121,8 @@ async function inserirTrecho(origem_aeroporto_id, destino_aeroporto_id) {
     };
     await connection.execute(trechoQuery, trechoParams);
 
-    // Commit da transação
     await connection.commit();
 
-    // Fechar a conexão
     await connection.close();
 
     console.log('Dados do trecho inseridos com sucesso.');
@@ -137,17 +134,14 @@ async function inserirTrecho(origem_aeroporto_id, destino_aeroporto_id) {
 
 async function inserirVoo(data, trecho_id, horario_partida, horario_chegada, aeroporto_saida_id, aeroporto_chegada_id, valor_assento) {
   try {
-    // Configurar a conexão com o banco de dados
     const connection = await oracledb.getConnection({
       user: 'LEO',
       password: 'renataematheus',
       connectString: 'oracledb:LEO/renataematheus@//localhost:1521/xepdb1'
     });
 
-    // Iniciar uma transação
     await connection.beginTransaction();
 
-    // Inserir dados na tabela Voos
     const vooQuery = `
       INSERT INTO Voos (voo_id, data, trecho_id, horario_partida, horario_chegada, aeroporto_saida_id, aeroporto_chegada_id, valor_assento)
       VALUES (SEQUENCE_VOOS.NEXTVAL, :data, :trecho_id, TO_TIMESTAMP(:horario_partida, 'YYYY-MM-DD HH24:MI:SS'), TO_TIMESTAMP(:horario_chegada, 'YYYY-MM-DD HH24:MI:SS'), :aeroporto_saida_id, :aeroporto_chegada_id, :valor_assento)
@@ -163,10 +157,8 @@ async function inserirVoo(data, trecho_id, horario_partida, horario_chegada, aer
     };
     await connection.execute(vooQuery, vooParams);
 
-    // Commit da transação
     await connection.commit();
 
-    // Fechar a conexão
     await connection.close();
 
     console.log('Dados do voo inseridos com sucesso.');
