@@ -20,9 +20,9 @@ app.get('/', (req, res) => {
 
 
 const dbConfig = {
-  user: 'LEO',
-  password: 'renataematheus',
-  connectString: 'oracledb:LEO/renataematheus@//localhost:1521/xepdb1'
+  user: 'C##LEO',
+  password: 'renataematheus@',
+  connectString:'localhost:1521/xe'
 };
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -59,9 +59,9 @@ app.listen(port, () => {
 async function inserirAeronaveAeroporto(modelo, numero_identificacao, fabricante, ano_fabricacao, mapa_assentos, codigo_aeroporto, nome_aeroporto, cidade_id) {
   try {
     const connection = await oracledb.getConnection({
-      user: 'LEO',
-      password: 'renataematheus',
-      connectString: 'oracledb:LEO/renataematheus@//localhost:1521/xepdb1'
+      user: 'C##LEO',
+      password: 'renataematheus@',
+      connectString: 'localhost:1521/xe'
     });
 
     await connection.beginTransaction();
@@ -104,9 +104,9 @@ async function inserirAeronaveAeroporto(modelo, numero_identificacao, fabricante
 async function inserirTrecho(origem_aeroporto_id, destino_aeroporto_id) {
   try {
     const connection = await oracledb.getConnection({
-      user: 'LEO',
-      password: 'renataematheus',
-      connectString: 'oracledb:LEO/renataematheus@//localhost:1521/xepdb1'
+      user: 'C##LEO',
+      password: 'renataematheus@',
+      connectString: 'localhost:1521/xe'
     });
 
     await connection.beginTransaction();
@@ -135,9 +135,9 @@ async function inserirTrecho(origem_aeroporto_id, destino_aeroporto_id) {
 async function inserirVoo(data, trecho_id, horario_partida, horario_chegada, aeroporto_saida_id, aeroporto_chegada_id, valor_assento) {
   try {
     const connection = await oracledb.getConnection({
-      user: 'LEO',
-      password: 'renataematheus',
-      connectString: 'oracledb:LEO/renataematheus@//localhost:1521/xepdb1'
+      user: 'C##LEO',
+      password: 'renataematheus@',
+      connectString: 'localhost:1521/xe'
     });
 
     await connection.beginTransaction();
